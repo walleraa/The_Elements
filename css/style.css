@@ -10,6 +10,18 @@ body {
     top: 10%;
     left: 5%;
 }
+#character{
+    height: 8%;
+    width: 3%;
+    background: blue;
+    position: relative;
+    top: 90%;
+    left: 5%;
+}
+
+
+
+
 /* @media screen and (min-width:600px) {
     #game {
         width: 600px;
