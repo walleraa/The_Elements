@@ -4,15 +4,27 @@ const height = boundary.offsetHeight;
 const width = boundary.offsetWidth;
 const charHeight = character.offsetHeight;
 const charWidth = character.offsetWidth;
-let paceY = 0
-let paceX = 0 
+let paceY = 0;
+let paceX = 0;
+// const levels = []
+const blocks = [[5, 35, 35, 40]];
 
 function main() {
-    step()
-    console.log(charHeight);
-    console.log(height);
-    document.onkeydown = (event) => {
+    step();
+    addBlocks();
+    keystrokes();
+}//end main
 
+function step() {
+    //This function is to calculate the percentage to know how far to move
+    const pace = 2; //Calculating for 1%
+    paceY = height/100 * pace;
+    paceX = width/100 * pace;
+}//end step
+
+function keystrokes() {
+    document.addEventListener("keydown", 
+        (event) => {
         if(event.key === "a" || event.key === "ArrowLeft") {
             move("left");
         }//LEFT
@@ -25,16 +37,8 @@ function main() {
         else if (event.key === "s" || event.key === "ArrowDown") {
             move("down");
         }//DOWN
-
-    };
-}//end main
-
-function step() {
-    //This function is to calculate the percentage to know how far to move
-    const pace = 1; //Calculating for 1%
-    paceY = height/100 * pace;
-    paceX = width/100 * pace;
-}//end step
+    });
+}//end keystrokes
 
 function move(direction) {
     const curPosLeft = character.offsetLeft;
@@ -79,5 +83,19 @@ function move(direction) {
 
     }//end switch
 }//end move
+
+function addBlocks() {
+    let info = [];
+    let style = "";
+    for (let i = 0; i < blocks.length; ++i) {
+        info = blocks[i];
+        style = "width:" + info[0] + "%; height:" + info[1] + "%; ";
+        style += "top: " + info[2] + "%; left:" + info[3] + "%; ";
+        boundary.insertAdjacentHTML('beforeend', '<div id="block" style="'+style+'background-color:red; position: relative;"></div>');
+        // boundary.innerHTML = blockHTML;
+    }//end for
+    keystrokes();
+    // console.log(boundary);
+}//end addBlocks
 
 main();
