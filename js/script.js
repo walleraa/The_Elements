@@ -7,7 +7,8 @@ const charWidth = character.offsetWidth;
 let paceY = 0;
 let paceX = 0;
 // const levels = []
-const blocks = [[5, 35, 35, 40]];
+// [width, height, left, top]
+const blocks = [[5, 35, 35, 40], [13, 3, 80, 67]];
 
 function main() {
     step();
@@ -91,11 +92,10 @@ function addBlocks() {
         info = blocks[i];
         style = "width:" + info[0] + "%; height:" + info[1] + "%; ";
         style += "top: " + info[2] + "%; left:" + info[3] + "%; ";
-        boundary.insertAdjacentHTML('beforeend', '<div id="block" style="'+style+'background-color:red; position: relative;"></div>');
-        // boundary.innerHTML = blockHTML;
+        boundary.insertAdjacentHTML('beforeend', 
+            '<div id="block" style="'+style+'background-color:red; position: absolute;"></div>'
+        );
     }//end for
-    keystrokes();
-    // console.log(boundary);
 }//end addBlocks
 
 main();
