@@ -64,7 +64,7 @@ function move(direction) {
 
         case "up":
             step = curPosTop - paceY;
-            if (step >= 0)
+            if (checkUp(step, curPosLeft))
                 character.style.top = step + 'px';
             // else
             //     character.style.top = '0px';
@@ -82,7 +82,7 @@ function move(direction) {
 
         case "down":
             step = curPosTop + paceY;
-            if (step <= height - charHeight)
+            if (checkDown(step, curPosLeft))
                 character.style.top = step + 'px';
             // else
             //     character.style.top = (height - charHeight) + 'px';
@@ -119,20 +119,12 @@ function checkLeft(step, top) {
         blockBottom = blocks[i][2] + blocks[i][1];
         blockBottom *= percentY;
         blockTop = blocks[i][2] * percentY;
-        // console.log("step: " + step + " top: " + top);
-        // console.log("limit: "+ limit + " blockBottom: " + blockBottom);
         if (top <= blockBottom && bottom <= blockBottom && top >= blockTop && bottom >= blockTop)
             return step >= limit || right <= limit;
-        else if (top <= blockBottom && bottom >= blockBottom) {
-            // console.log('top');
-            // console.log(blocks[i]);
+        else if (top <= blockBottom && bottom >= blockBottom)
             return step >= limit || right <= limit;
-        }
-        else if (bottom >= blockTop && top <= blockTop) {
-            // console.log('bottom');
-            // console.log(blocks[i]);
+        else if (bottom >= blockTop && top <= blockTop)
             return step >= limit || right <= limit;
-        }
     }//end for
     return true;
 }//end checkLeft
@@ -154,14 +146,61 @@ function checkRight(step, top) {
         blockTop = blocks[i][2] * percentY;
         if (top <= blockBottom && bottom <= blockBottom && top >= blockTop && bottom >= blockTop)
             return step <= limit || left >= limit;
-        else if (top <= blockBottom && bottom >= blockBottom) {
+        else if (top <= blockBottom && bottom >= blockBottom)
             return step <= limit || left >= limit;
-        }
-        else if (bottom >= blockTop && top <= blockTop) {
+        else if (bottom >= blockTop && top <= blockTop)
             return step <= limit || left >= limit;
-        }
     }//end for
     return true;
 }//end checkRight
+
+function checkUp (step, left) {
+    const right = left + charWidth;
+    const bottom = step + charHeight;
+    let limit = 0;
+    let blockRight = 0;
+    let blockLeft = 0;
+    if (step < 0)
+        return false;
+    for (let i = 0; i < blocks.length; ++ i) {
+        limit = blocks[i][2] + blocks[i][1];
+        limit *= percentY;
+        blockRight = blocks[i][3] + blocks[i][0];
+        blockRight *= percentX;
+        blockLeft = blocks[i][3] * percentX;
+        if (left <= blockRight && right <= blockRight && left >= blockLeft && right >= blockLeft)
+            return step >= limit || bottom <= limit;
+        else if (left <= blockRight && right >= blockRight)
+            return step >= limit || bottom <= limit;
+        else if (right >= blockLeft && left <= blockLeft)
+            return step >= limit || bottom <= limit;
+    }//end for
+    return true;
+}
+
+function checkDown (step, left) {
+    const right = left + charWidth;
+    const top = step;
+    let limit = 0;
+    let blockRight = 0;
+    let blockLeft = 0;
+    step = step + charHeight;
+    if (step > height)
+        return false;
+    for (let i = 0; i < blocks.length; ++ i) {
+        limit = blocks[i][2];
+        limit *= percentY;
+        blockRight = blocks[i][3] + blocks[i][0];
+        blockRight *= percentX;
+        blockLeft = blocks[i][3] * percentX;
+        if (left <= blockRight && right <= blockRight && left >= blockLeft && right >= blockLeft)
+            return step <= limit || top >= limit;
+        else if (left <= blockRight && right >= blockRight)
+            return step <= limit || top >= limit;
+        else if (right >= blockLeft && left <= blockLeft)
+            return step <= limit || top >= limit;
+    }//end for
+    return true;
+}
 
 main();
