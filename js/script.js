@@ -6,6 +6,8 @@ const charHeight = character.offsetHeight;
 const charWidth = character.offsetWidth;
 let paceY = 0;
 let paceX = 0;
+const percentY = height/100;
+const percentX = width/100; 
 // const levels = []
 // [width, height, top, left]
 const blocks = [[5, 35, 35, 40], [13, 3, 80, 67]];
@@ -21,8 +23,8 @@ function main() {
 function step() {
     //This function is to calculate the percentage to know how far to move
     const pace = 2; //Calculating for 1%
-    paceY = height/100 * pace;
-    paceX = width/100 * pace;
+    paceY = percentY * pace;
+    paceX = percentX * pace;
 }//end step
 
 function keystrokes() {
@@ -54,8 +56,8 @@ function move(direction) {
             //     character.style.left = step + 'px';
             if (checkLeft(step, curPosTop))
                 character.style.left = step + 'px';
-            else
-                console.log("BLOCKED");
+            // else
+            //     console.log("BLOCKED");
             //     character.style.left = '0px';
             break;
 
@@ -71,7 +73,7 @@ function move(direction) {
 
         case "right":
             step = curPosLeft + paceX;
-            if (step <= width - charWidth)
+            if (checkRight(step, curPosTop))
                 character.style.left = step + 'px';
             // else
             //     character.style.left = (width - charWidth) + 'px';
@@ -113,10 +115,10 @@ function checkLeft(step, top) {
         return false;
     for (let i = 0; i < blocks.length; ++ i) {
         limit = blocks[i][3] + blocks[i][0];
-        limit *= width/100;
+        limit *= percentX;
         blockBottom = blocks[i][2] + blocks[i][1];
-        blockBottom *= height/100;
-        blockTop = blocks[i][2] * height/100;
+        blockBottom *= percentY;
+        blockTop = blocks[i][2] * percentY;
         // console.log("step: " + step + " top: " + top);
         // console.log("limit: "+ limit + " blockBottom: " + blockBottom);
         if (top <= blockBottom && bottom <= blockBottom && top >= blockTop && bottom >= blockTop)
@@ -134,5 +136,32 @@ function checkLeft(step, top) {
     }//end for
     return true;
 }//end checkLeft
+
+function checkRight(step, top) {
+    const bottom = top + charHeight;
+    const left = step;
+    let limit = 0;
+    let blockBottom = 0;
+    let blockTop = 0;
+    step = step + charWidth;
+    if (step > width)
+        return false;
+    for (let i = 0; i < blocks.length; ++ i) {
+        limit = blocks[i][3];
+        limit *= percentX;
+        blockBottom = blocks[i][2] + blocks[i][1];
+        blockBottom *= percentY;
+        blockTop = blocks[i][2] * percentY;
+        if (top <= blockBottom && bottom <= blockBottom && top >= blockTop && bottom >= blockTop)
+            return step <= limit || left >= limit;
+        else if (top <= blockBottom && bottom >= blockBottom) {
+            return step <= limit || left >= limit;
+        }
+        else if (bottom >= blockTop && top <= blockTop) {
+            return step <= limit || left >= limit;
+        }
+    }//end for
+    return true;
+}//end checkRight
 
 main();
