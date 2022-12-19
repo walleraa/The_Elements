@@ -7,13 +7,15 @@ const charWidth = character.offsetWidth;
 let paceY = 0;
 let paceX = 0;
 // const levels = []
-// [width, height, left, top]
+// [width, height, top, left]
 const blocks = [[5, 35, 35, 40], [13, 3, 80, 67]];
 
 function main() {
     step();
     addBlocks();
     keystrokes();
+    console.log(height);
+    console.log(width);
 }//end main
 
 function step() {
@@ -48,9 +50,12 @@ function move(direction) {
     switch(direction) {
         case "left":
             step = curPosLeft - paceX;
-            if (step >= 0)
+            // if (step >= 0)
+            //     character.style.left = step + 'px';
+            if (checkLeft(step, curPosTop))
                 character.style.left = step + 'px';
-            // else
+            else
+                console.log("BLOCKED");
             //     character.style.left = '0px';
             break;
 
@@ -97,5 +102,37 @@ function addBlocks() {
         );
     }//end for
 }//end addBlocks
+
+function checkLeft(step, top) {
+    const bottom = top + charHeight;
+    const right = step + charWidth;
+    let limit = 0;
+    let blockBottom = 0;
+    let blockTop = 0;
+    if (step < 0)
+        return false;
+    for (let i = 0; i < blocks.length; ++ i) {
+        limit = blocks[i][3] + blocks[i][0];
+        limit *= width/100;
+        blockBottom = blocks[i][2] + blocks[i][1];
+        blockBottom *= height/100;
+        blockTop = blocks[i][2] * height/100;
+        // console.log("step: " + step + " top: " + top);
+        // console.log("limit: "+ limit + " blockBottom: " + blockBottom);
+        if (top <= blockBottom && bottom <= blockBottom && top >= blockTop && bottom >= blockTop)
+            return step >= limit || right <= limit;
+        else if (top <= blockBottom && bottom >= blockBottom) {
+            // console.log('top');
+            // console.log(blocks[i]);
+            return step >= limit || right <= limit;
+        }
+        else if (bottom >= blockTop && top <= blockTop) {
+            // console.log('bottom');
+            // console.log(blocks[i]);
+            return step >= limit || right <= limit;
+        }
+    }//end for
+    return true;
+}//end checkLeft
 
 main();
