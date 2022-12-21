@@ -8,13 +8,15 @@ let paceY = 0;
 let paceX = 0;
 const percentY = height/100;
 const percentX = width/100; 
-// const levels = []
+// [top, left]
+const starts = [[90, 5], [1, 1]];
 // [width, height, top, left]
-const levels = [[[5, 35, 35, 40], [13, 3, 80, 67]], []];
+const levels = [[[5, 35, 35, 40], [13, 3, 80, 67]], [[85, 85, 6, 6]]];
 let curLevel = 1;
 
 function main() {
     step();
+    addChar(curLevel);
     addBlocks(curLevel);
     keystrokes();
     console.log(height);
@@ -92,6 +94,11 @@ function move(direction) {
 
     }//end switch
 }//end move
+
+function addChar(level) {
+    character.style.top = starts[level][0] + '%';
+    character.style.left = starts[level][1] + '%';
+}//end addChar
 
 function addBlocks(level) {
     let info = [];
