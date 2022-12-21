@@ -14,11 +14,18 @@ body {
     height: 8%;
     width: 3%;
     background: blue;
-    position: relative;
+    position: absolute;
     /* top: 90%;
     left: 5%; */
 }
-
+#portal{
+    height: 10%;
+    width: 5%;
+    background: lime;
+    position: absolute;
+    border: .5px solid black;
+    border-radius: 10px;
+}
 
 
 /* @media screen and (min-width:600px) {

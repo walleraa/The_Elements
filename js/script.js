@@ -1,5 +1,6 @@
 const character = document.querySelector("#character");
 const boundary = document.querySelector("#game");
+const portal = document.querySelector("#portal");
 const height = boundary.offsetHeight;
 const width = boundary.offsetWidth;
 const charHeight = character.offsetHeight;
@@ -10,18 +11,36 @@ const percentY = height/100;
 const percentX = width/100; 
 // [top, left]
 const starts = [[90, 5], [1, 1]];
+// [top, left]
+const finish = [[50, 50],[1, 95]];
 // [width, height, top, left]
 const levels = [[[5, 35, 35, 40], [13, 3, 80, 67]], [[85, 85, 6, 6]]];
-let curLevel = 1;
+let curLevel = 0;
+
+let curPosLeft = starts[curLevel][1];
+let curPosTop = starts[curLevel][0];
 
 function main() {
+    console.log(localStorage.getItem("level"));
+    loadLevel();
     step();
     addChar(curLevel);
     addBlocks(curLevel);
+    addFinish(curLevel);
     keystrokes();
     console.log(height);
     console.log(width);
 }//end main
+
+function loadLevel() {
+    let level = localStorage.getItem("level");
+    if (level) {
+        curLevel = level;
+    }
+    else {
+        console.log("No previous progression to load!");
+    }
+}//end loadLevel
 
 function step() {
     //This function is to calculate the percentage to know how far to move
@@ -45,12 +64,19 @@ function keystrokes() {
         else if (event.key === "s" || event.key === "ArrowDown") {
             move("down");
         }//DOWN
+        else if (event.key === " ") {
+            trigger();
+        }//ENTER
+        else if (event.key === "u") {
+            localStorage.removeItem("level");
+            location.reload();
+        }//Right now this just exists to make testing easier
     });
 }//end keystrokes
 
 function move(direction) {
-    const curPosLeft = character.offsetLeft;
-    const curPosTop = character.offsetTop;
+    curPosLeft = character.offsetLeft;
+    curPosTop = character.offsetTop;
     let step = 0;
     switch(direction) {
         case "left":
@@ -95,6 +121,24 @@ function move(direction) {
     }//end switch
 }//end move
 
+function trigger() {
+    const top = portal.offsetTop;
+    const bottom = top + portal.offsetHeight;
+    const left = portal.offsetLeft;
+    const right = left + portal.offsetWidth;
+    if (curPosTop >= top && curPosTop <= bottom && curPosLeft >= left && curPosLeft <= right) {
+        if (parseInt(curLevel) === levels.length - 1) {
+            console.log("No more levels at the moment!");
+        }//end if
+        else {
+            curLevel += 1;
+            localStorage.removeItem("level"); //Have to remove then set or else it gets funky for some reason
+            localStorage.setItem("level", curLevel);
+            location.reload();
+        }//end else
+    }//end if
+}//end trigger
+
 function addChar(level) {
     character.style.top = starts[level][0] + '%';
     character.style.left = starts[level][1] + '%';
@@ -113,5 +157,10 @@ function addBlocks(level) {
         );
     }//end for
 }//end addBlocks
+
+function addFinish(level) {
+    portal.style.top = finish[level][0] + '%';
+    portal.style.left = finish[level][1] + '%';
+}//end addFinish
 
 main();
