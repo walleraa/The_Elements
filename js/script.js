@@ -10,11 +10,12 @@ const percentY = height/100;
 const percentX = width/100; 
 // const levels = []
 // [width, height, top, left]
-const blocks = [[5, 35, 35, 40], [13, 3, 80, 67]];
+const levels = [[[5, 35, 35, 40], [13, 3, 80, 67]], []];
+let curLevel = 1;
 
 function main() {
     step();
-    addBlocks();
+    addBlocks(curLevel);
     keystrokes();
     console.log(height);
     console.log(width);
@@ -54,7 +55,7 @@ function move(direction) {
             step = curPosLeft - paceX;
             // if (step >= 0)
             //     character.style.left = step + 'px';
-            if (checkLeft(step, curPosTop))
+            if (checkLeft(step, curPosTop, curLevel))
                 character.style.left = step + 'px';
             // else
             //     console.log("BLOCKED");
@@ -64,7 +65,7 @@ function move(direction) {
 
         case "up":
             step = curPosTop - paceY;
-            if (checkUp(step, curPosLeft))
+            if (checkUp(step, curPosLeft, curLevel))
                 character.style.top = step + 'px';
             // else
             //     character.style.top = '0px';
@@ -73,7 +74,7 @@ function move(direction) {
 
         case "right":
             step = curPosLeft + paceX;
-            if (checkRight(step, curPosTop))
+            if (checkRight(step, curPosTop, curLevel))
                 character.style.left = step + 'px';
             // else
             //     character.style.left = (width - charWidth) + 'px';
@@ -82,7 +83,7 @@ function move(direction) {
 
         case "down":
             step = curPosTop + paceY;
-            if (checkDown(step, curPosLeft))
+            if (checkDown(step, curPosLeft, curLevel))
                 character.style.top = step + 'px';
             // else
             //     character.style.top = (height - charHeight) + 'px';
@@ -92,9 +93,10 @@ function move(direction) {
     }//end switch
 }//end move
 
-function addBlocks() {
+function addBlocks(level) {
     let info = [];
     let style = "";
+    let blocks = levels[level];
     for (let i = 0; i < blocks.length; ++i) {
         info = blocks[i];
         style = "width:" + info[0] + "%; height:" + info[1] + "%; ";
