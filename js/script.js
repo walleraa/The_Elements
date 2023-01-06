@@ -16,6 +16,7 @@ const finish = [[50, 50],[1, 95]];
 // [width, height, top, left]
 // const levels = [[[5, 35, 35, 40], [13, 3, 80, 67]], [[85, 85, 6, 6]]];
 const levelBlocks = getBlocks();
+// const levelEnemies = getEnemies();
 
 let curLevel = 0;
 
@@ -23,6 +24,7 @@ let curPosLeft = starts[curLevel][1];
 let curPosTop = starts[curLevel][0];
 
 function main() {
+    // localStorage.removeItem("level");
     console.log(localStorage.getItem("level"));
     loadLevel();
     step();
@@ -37,7 +39,7 @@ function main() {
 function loadLevel() {
     let level = localStorage.getItem("level");
     if (level) {
-        curLevel = level;
+        curLevel = parseInt(level);
     }
     else {
         console.log("No previous progression to load!");
@@ -71,6 +73,10 @@ function keystrokes() {
         }//ENTER
         else if (event.key === "u") {
             localStorage.removeItem("level");
+            curLevel -= 1;
+            if (curLevel < 0)
+                curLevel = 0;
+            localStorage.setItem("level", curLevel);
             location.reload();
         }//Right now this just exists to make testing easier
     });
@@ -129,7 +135,7 @@ function trigger() {
     const left = portal.offsetLeft;
     const right = left + portal.offsetWidth;
     if (curPosTop >= top && curPosTop <= bottom && curPosLeft >= left && curPosLeft <= right) {
-        if (parseInt(curLevel) === levelBlocks.length - 1) {
+        if (curLevel === levelBlocks.length - 1) {
             console.log("No more levels at the moment!");
         }//end if
         else {
@@ -159,6 +165,13 @@ function addBlocks(level) {
         );
     }//end for
 }//end addBlocks
+
+function addEnemies(level) {
+    // let info = [];
+    // let style = "";
+    // let enemies = levelEnemies[level];
+
+}//end addEnemies
 
 function addFinish(level) {
     portal.style.top = finish[level][0] + '%';
