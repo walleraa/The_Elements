@@ -9,17 +9,13 @@ let paceY = 0;
 let paceX = 0;
 const percentY = height/100;
 const percentX = width/100; 
-// [top, left]
-const starts = [[90, 5], [1, 1]];
-// [top, left]
-const finish = [[50, 50],[1, 95]];
-// [width, height, top, left]
-// const levels = [[[5, 35, 35, 40], [13, 3, 80, 67]], [[85, 85, 6, 6]]];
+const starts = getStarts();
+const finish = getFinishes();
 const levelBlocks = getBlocks();
 // const levelEnemies = getEnemies();
 
 let curLevel = 0;
-
+console.log(starts);
 let curPosLeft = starts[curLevel][1];
 let curPosTop = starts[curLevel][0];
 
@@ -31,6 +27,7 @@ function main() {
     addChar(curLevel);
     addBlocks(curLevel);
     addFinish(curLevel);
+
     keystrokes();
     console.log(height);
     console.log(width);
@@ -176,6 +173,7 @@ function addEnemies(level) {
 function addFinish(level) {
     portal.style.top = finish[level][0] + '%';
     portal.style.left = finish[level][1] + '%';
+    console.log(finish[level]);
 }//end addFinish
 
 main();

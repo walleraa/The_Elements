@@ -4,9 +4,9 @@
 // [width, height, top, left]
 let levels = [];
 function getBlocks() {
-    // const levelBlocks = [[[5, 35, 35, 40], [13, 3, 80, 67]], [[85, 85, 6, 6]]];
     level1();
     level2();
+    level3();
     return levels;
 }//end getBlocks
 
@@ -19,5 +19,5 @@ function level2() {
 }//end level2
 
 function level3() {
-
+    levels.push([]);
 }//end level3
