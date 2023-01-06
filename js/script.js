@@ -11,11 +11,11 @@ const percentY = height/100;
 const percentX = width/100; 
 const starts = getStarts();
 const finish = getFinishes();
-const levelBlocks = getBlocks();
-// const levelEnemies = getEnemies();
+const blockInfo = getBlocks();
+const enemyInfo = getEnemies();
 
 let curLevel = 0;
-console.log(starts);
+// console.log(starts);
 let curPosLeft = starts[curLevel][1];
 let curPosTop = starts[curLevel][0];
 
@@ -27,7 +27,7 @@ function main() {
     addChar(curLevel);
     addBlocks(curLevel);
     addFinish(curLevel);
-
+    addEnemies(curLevel);
     keystrokes();
     console.log(height);
     console.log(width);
@@ -132,7 +132,7 @@ function trigger() {
     const left = portal.offsetLeft;
     const right = left + portal.offsetWidth;
     if (curPosTop >= top && curPosTop <= bottom && curPosLeft >= left && curPosLeft <= right) {
-        if (curLevel === levelBlocks.length - 1) {
+        if (curLevel === blockInfo.length - 1) {
             console.log("No more levels at the moment!");
         }//end if
         else {
@@ -152,7 +152,7 @@ function addChar(level) {
 function addBlocks(level) {
     let info = [];
     let style = "";
-    let blocks = levelBlocks[level];
+    let blocks = blockInfo[level];
     for (let i = 0; i < blocks.length; ++i) {
         info = blocks[i];
         style = "width:" + info[0] + "%; height:" + info[1] + "%; ";
@@ -164,16 +164,23 @@ function addBlocks(level) {
 }//end addBlocks
 
 function addEnemies(level) {
-    // let info = [];
-    // let style = "";
-    // let enemies = levelEnemies[level];
-
+    let info = [];
+    let style = "";
+    let enemies = enemyInfo[level];
+    for (let i = 0; i < enemies.length; ++i) {
+        info = enemies[i];
+        style = "width: 3%; height:8%; ";
+        style += "top:" + info[0] + "%; left:" + info[1] + "%; ";
+        boundary.insertAdjacentHTML('beforeend', 
+            '<div id="enemy" style="'+style+'background-color:orange; position: absolute;"></div>'
+        ); 
+    }//end for
 }//end addEnemies
 
 function addFinish(level) {
     portal.style.top = finish[level][0] + '%';
     portal.style.left = finish[level][1] + '%';
-    console.log(finish[level]);
 }//end addFinish
+
 
 main();

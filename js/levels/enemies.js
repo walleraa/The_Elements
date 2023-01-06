@@ -1,20 +1,20 @@
 // [top, left, starting direction, type]
-levels = [];
+let levelEnemies = [];
 function getEnemies() {
-    level1();
-    level2();
-    level3();
-    return levels;
+    enemies1();
+    enemies2();
+    enemies3();
+    return levelEnemies;
 }//end getEnemies
 
-function level1() {
-    levels.push([]);
-}//end level1
+function enemies1() {
+    levelEnemies.push([]);
+}//end enemies1
 
-function level2() {
-    levels.push([]);
-}//end level2
+function enemies2() {
+    levelEnemies.push([]);
+}//end enemies2
 
-function level3() {
-    levels.push([0, 0, 0, 0]);
-}//end level3
+function enemies3() {
+    levelEnemies.push([0, 0, 0, 0]);
+}//end enemies3

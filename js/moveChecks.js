@@ -1,5 +1,5 @@
 function checkLeft(step, top, level) {
-    let blocks = levelBlocks[level];
+    let blocks = blockInfo[level];
     const bottom = top + charHeight;
     const right = step + charWidth;
     let limit = 0;
@@ -24,7 +24,7 @@ function checkLeft(step, top, level) {
 }//end checkLeft
 
 function checkRight(step, top, level) {
-    let blocks = levelBlocks[level];
+    let blocks = blockInfo[level];
     const bottom = top + charHeight;
     const left = step;
     let limit = 0;
@@ -50,7 +50,7 @@ function checkRight(step, top, level) {
 }//end checkRight
 
 function checkUp (step, left, level) {
-    let blocks = levelBlocks[level];
+    let blocks = blockInfo[level];
     const right = left + charWidth;
     const bottom = step + charHeight;
     let limit = 0;
@@ -75,7 +75,7 @@ function checkUp (step, left, level) {
 }
 
 function checkDown (step, left, level) {
-    let blocks = levelBlocks[level];
+    let blocks = blockInfo[level];
     const right = left + charWidth;
     const top = step;
     let limit = 0;
