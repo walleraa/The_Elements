@@ -14,7 +14,9 @@ const starts = [[90, 5], [1, 1]];
 // [top, left]
 const finish = [[50, 50],[1, 95]];
 // [width, height, top, left]
-const levels = [[[5, 35, 35, 40], [13, 3, 80, 67]], [[85, 85, 6, 6]]];
+// const levels = [[[5, 35, 35, 40], [13, 3, 80, 67]], [[85, 85, 6, 6]]];
+const levelBlocks = getBlocks();
+
 let curLevel = 0;
 
 let curPosLeft = starts[curLevel][1];
@@ -127,7 +129,7 @@ function trigger() {
     const left = portal.offsetLeft;
     const right = left + portal.offsetWidth;
     if (curPosTop >= top && curPosTop <= bottom && curPosLeft >= left && curPosLeft <= right) {
-        if (parseInt(curLevel) === levels.length - 1) {
+        if (parseInt(curLevel) === levelBlocks.length - 1) {
             console.log("No more levels at the moment!");
         }//end if
         else {
@@ -147,7 +149,7 @@ function addChar(level) {
 function addBlocks(level) {
     let info = [];
     let style = "";
-    let blocks = levels[level];
+    let blocks = levelBlocks[level];
     for (let i = 0; i < blocks.length; ++i) {
         info = blocks[i];
         style = "width:" + info[0] + "%; height:" + info[1] + "%; ";
