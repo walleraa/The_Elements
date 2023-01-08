@@ -14,11 +14,14 @@ function checkLeft(step, top, level) {
         blockBottom *= percentY;
         blockTop = blocks[i][2] * percentY;
         if (top <= blockBottom && bottom <= blockBottom && top >= blockTop && bottom >= blockTop)
-            return step >= limit || right <= limit;
+            if (!(step >= limit || right <= limit))
+                return false;
         else if (top <= blockBottom && bottom >= blockBottom)
-            return step >= limit || right <= limit;
+            if (!(step >= limit || right <= limit))
+                return false;
         else if (bottom >= blockTop && top <= blockTop)
-            return step >= limit || right <= limit;
+            if (!(step >= limit || right <= limit))
+                return false;
     }//end for
     return true;
 }//end checkLeft
@@ -40,11 +43,14 @@ function checkRight(step, top, level) {
         blockBottom *= percentY;
         blockTop = blocks[i][2] * percentY;
         if (top <= blockBottom && bottom <= blockBottom && top >= blockTop && bottom >= blockTop)
-            return step <= limit || left >= limit;
+            if (!(step <= limit || left >= limit))
+                return false;
         else if (top <= blockBottom && bottom >= blockBottom)
-            return step <= limit || left >= limit;
+            if (!(step <= limit || left >= limit))
+                return false;
         else if (bottom >= blockTop && top <= blockTop)
-            return step <= limit || left >= limit;
+            if (!(step <= limit || left >= limit))
+                return false;
     }//end for
     return true;
 }//end checkRight
@@ -65,11 +71,14 @@ function checkUp (step, left, level) {
         blockRight *= percentX;
         blockLeft = blocks[i][3] * percentX;
         if (left <= blockRight && right <= blockRight && left >= blockLeft && right >= blockLeft)
-            return step >= limit || bottom <= limit;
+            if (!(step >= limit || bottom <= limit))
+                return false;
         else if (left <= blockRight && right >= blockRight)
-            return step >= limit || bottom <= limit;
+            if (!(step >= limit || bottom <= limit))
+                return false;
         else if (right >= blockLeft && left <= blockLeft)
-            return step >= limit || bottom <= limit;
+            if (!(step >= limit || bottom <= limit))
+                return false;
     }//end for
     return true;
 }//end checkUp
@@ -91,11 +100,14 @@ function checkDown (step, left, level) {
         blockRight *= percentX;
         blockLeft = blocks[i][3] * percentX;
         if (left <= blockRight && right <= blockRight && left >= blockLeft && right >= blockLeft)
-            return step <= limit || top >= limit;
+            if (!(step <= limit || top >= limit))
+                return false;
         else if (left <= blockRight && right >= blockRight)
-            return step <= limit || top >= limit;
+            if (!(step <= limit || top >= limit))
+                return false;
         else if (right >= blockLeft && left <= blockLeft)
-            return step <= limit || top >= limit;
+            if (!(step <= limit || top >= limit))
+                return false;
     }//end for
     return true;
 }//end checkDown
