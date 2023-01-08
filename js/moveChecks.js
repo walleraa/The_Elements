@@ -72,7 +72,7 @@ function checkUp (step, left, level) {
             return step >= limit || bottom <= limit;
     }//end for
     return true;
-}
+}//end checkUp
 
 function checkDown (step, left, level) {
     let blocks = blockInfo[level];
@@ -98,4 +98,34 @@ function checkDown (step, left, level) {
             return step <= limit || top >= limit;
     }//end for
     return true;
-}
+}//end checkDown
+
+function checkEnemies(top, left, level) {
+    let enemies = enemyInfo[level];
+    const bottom = top + charHeight;
+    const right = left + charWidth;
+    let enemyTop = 0;
+    let enemyBottom = 0;
+    let enemyLeft = 0;
+    let enemyRight = 0;
+    for (let i = 0; i < enemies.length; ++i) {
+        enemyTop = enemies[i][0] * percentY;
+        enemyLeft = enemies[i][1] * percentX;
+        switch(enemies[i][3]) {
+            case 0:
+                enemyBottom = enemyTop + 8 * percentY;
+                enemyRight = enemyLeft + 3 * percentX;
+                break;
+            case 1:
+                enemyBottom = enemyTop + 8 * percentY;
+                enemyRight = enemyLeft + 3 * percentX;
+                break;
+        }//end switch
+        if ((enemyTop <= top && enemyBottom >= top) || (enemyTop <= bottom && enemyBottom >= bottom)) {
+            if ((enemyLeft <= left && enemyRight >= left) || (enemyLeft <= right && enemyRight >= right)) {
+                console.log("Killed by enemy of type " + enemies[i][3]);
+                alert("GAME OVER");
+            }//end inner if
+        }//end if
+    }//end for
+}//end checkEnemies

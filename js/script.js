@@ -121,9 +121,8 @@ function move(direction) {
             // else
             //     character.style.top = (height - charHeight) + 'px';
             break;
-
-
     }//end switch
+    checkEnemies(character.offsetTop, character.offsetLeft, curLevel);
 }//end move
 
 function trigger() {
@@ -171,13 +170,15 @@ function addEnemies(level) {
     for (let i = 0; i < enemies.length; ++i) {
         info = enemies[i];
         style = "top:" + info[0] + "%; left:" + info[1] + "%; ";
+
         switch(info[3]) {
             case 0:
                 type = "width: 3%; height:8%; background-color:orange; position: absolute;";
                 break;
             case 1:
                 type = "width: 3%; height: 8%; background-color:grey; position: absolute;";
-        }
+        }//end switch
+
         boundary.insertAdjacentHTML('beforeend', 
             '<div id="enemy" style="'+style+type+'"></div>'
         ); 
