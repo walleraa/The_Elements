@@ -125,7 +125,9 @@ function checkEnemies(top, left, level) {
             if ((enemyLeft <= left && enemyRight >= left) || (enemyLeft <= right && enemyRight >= right)) {
                 console.log("Killed by enemy of type " + enemies[i][3]);
                 alert("GAME OVER");
+                return false;
             }//end inner if
         }//end if
     }//end for
+    return true;
 }//end checkEnemies

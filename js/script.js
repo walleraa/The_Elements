@@ -122,7 +122,10 @@ function move(direction) {
             //     character.style.top = (height - charHeight) + 'px';
             break;
     }//end switch
-    checkEnemies(character.offsetTop, character.offsetLeft, curLevel);
+
+    if (!checkEnemies(character.offsetTop, character.offsetLeft, curLevel)) {
+        location.reload();
+    }//end if to reload the page in the occurence of a game over
 }//end move
 
 function trigger() {
