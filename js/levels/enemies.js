@@ -16,5 +16,5 @@ function enemies2() {
 }//end enemies2
 
 function enemies3() {
-    levelEnemies.push([0, 0, 0, 0]);
+    levelEnemies.push([[0, 0, 0, 0], [80, 60, 0, 0], [40, 84, 0, 1]]);
 }//end enemies3

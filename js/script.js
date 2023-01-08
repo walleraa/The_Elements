@@ -166,13 +166,20 @@ function addBlocks(level) {
 function addEnemies(level) {
     let info = [];
     let style = "";
+    let type = "";
     let enemies = enemyInfo[level];
     for (let i = 0; i < enemies.length; ++i) {
         info = enemies[i];
-        style = "width: 3%; height:8%; ";
-        style += "top:" + info[0] + "%; left:" + info[1] + "%; ";
+        style = "top:" + info[0] + "%; left:" + info[1] + "%; ";
+        switch(info[3]) {
+            case 0:
+                type = "width: 3%; height:8%; background-color:orange; position: absolute;";
+                break;
+            case 1:
+                type = "width: 3%; height: 8%; background-color:grey; position: absolute;";
+        }
         boundary.insertAdjacentHTML('beforeend', 
-            '<div id="enemy" style="'+style+'background-color:orange; position: absolute;"></div>'
+            '<div id="enemy" style="'+style+type+'"></div>'
         ); 
     }//end for
 }//end addEnemies
