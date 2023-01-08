@@ -7,6 +7,7 @@ function getBlocks() {
     level1();
     level2();
     level3();
+    level4();
     return levels;
 }//end getBlocks
 
@@ -21,3 +22,7 @@ function level2() {
 function level3() {
     levels.push([]);
 }//end level3
+
+function level4() {
+    levels.push([[10, 100, 0, 0], [100, 10, 0, 0], [90, 10, 90, 10], [10, 90, 10, 90]]);
+}//end level4
