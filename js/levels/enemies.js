@@ -26,5 +26,5 @@ function enemies3() {
 }//end enemies3
 
 function enemies4() {
-    levelEnemies.push([]);
+    levelEnemies.push([[12, 83, 1, 2]]);
 }//end enemies4

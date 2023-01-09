@@ -180,6 +180,10 @@ function addEnemies(level) {
                 break;
             case 1:
                 type = "width: 3%; height: 8%; background-color:grey; position: absolute;";
+                break;
+            case 2:
+                type = "width: 5%; height: 8%; background-color: magenta; position: absolute;";
+                break;
         }//end switch
 
         boundary.insertAdjacentHTML('beforeend', 

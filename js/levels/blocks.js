@@ -24,7 +24,7 @@ function level3() {
 }//end level3
 
 function level4() {
-    let levelBlocks = [[10, 100, 0, 0], [100, 10, 0, 0], [90, 10, 90, 10], [10, 90, 10, 90]];
+    let levelBlocks = [[10, 100, 0, 0], [100, 10, 0, 0], [90, 10, 90, 10], [10.01, 90, 10, 90]];
     levelBlocks.push([50, 50, 25, 25]);
     levels.push(levelBlocks);
 }//end level4
