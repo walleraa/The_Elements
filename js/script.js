@@ -234,7 +234,14 @@ function updateEnemy(direction, id, pace, level) {
             }//end if
             break;
     }//end switch
-    // console.log(enemyInfo[level][id]);
+    if (!checkEnemies(character.offsetTop, character.offsetLeft, level)) {
+        clearInterval(enemyInfo[level][id][4]); 
+        /*  
+            clearInterval prevents the enemy running through you after game over 
+            and causing a bunch of game over alerts
+        */
+        location.reload();
+    }//end if to reload the page in the occurence of a game over
 }//end updateEnemy
 
 function addFinish(level) {
