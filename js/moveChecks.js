@@ -111,6 +111,11 @@ function checkEnemies(top, left, level) {
             case 2:
                 enemyBottom = enemyTop + 8 * percentY;
                 enemyRight = enemyLeft + 5 * percentX;
+                break;
+            case 3:
+                enemyBottom = enemyTop + 8 * percentY;
+                enemyRight = enemyLeft + 5 * percentX;
+                break;
         }//end switch
         if ((enemyTop <= top && enemyBottom >= top) || (enemyTop <= bottom && enemyBottom >= bottom)) {
             if ((enemyLeft <= left && enemyRight >= left) || (enemyLeft <= right && enemyRight >= right)) {

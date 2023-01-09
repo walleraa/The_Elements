@@ -169,6 +169,7 @@ function addEnemies(level) {
     let info = [];
     let style = "";
     let type = "";
+    let id = "";
     let enemies = enemyInfo[level];
     for (let i = 0; i < enemies.length; ++i) {
         info = enemies[i];
@@ -183,14 +184,58 @@ function addEnemies(level) {
                 break;
             case 2:
                 type = "width: 5%; height: 8%; background-color: magenta; position: absolute;";
+                type += '"></div><div id="sight" style="width: 2%; height: 8%; ';
+                type += 'top:'+info[0]+"%; left:" + info[1]+"%; ";
+                type += "background-color: #FFD700; position: absolute";
+                break;
+            case 3:
+                type = "width: 3%; height: 8%; background-color: darkblue; position:absolute;";
+                id = ' class="stroller"';
+                enemyInfo[level][i].push(setInterval(updateEnemy, 1000, info[2], i, 1, level));
                 break;
         }//end switch
 
         boundary.insertAdjacentHTML('beforeend', 
-            '<div id="enemy" style="'+style+type+'"></div>'
+            '<div id='+i+' style="'+style+type+'"'+id+'></div>'
         ); 
     }//end for
 }//end addEnemies
+
+function updateEnemy(direction, id, pace, level) {
+    let enemy = document.getElementById(id);
+    let step = 0;
+    switch(direction) {
+        case 0: // case to go up
+            step = enemy.offsetTop - pace * percentY;
+            if (checkUp(step, enemy.offsetLeft, level)) {
+                enemy.style.top = step + 'px';
+                enemyInfo[level][id][0] -= pace;
+            }//end if
+            break;
+        case 1: // case to go left
+            step = enemy.offsetLeft - pace * percentX;
+            if (checkLeft(step, enemy.offsetTop, level)) {
+                enemy.style.left = step + 'px';
+                enemyInfo[level][id][1] -= pace;
+            }//end if
+            break;
+        case 2: // case to go down
+            step = enemy.offsetTop + pace * percentY;
+            if (checkDown(step, enemy.offsetLeft, level)) {
+                enemy.style.top = step + 'px';
+                enemyInfo[level][id][0] += pace;
+            }//end if
+            break;
+        case 3: // case to go right
+            step = enemy.offsetLeft + pace * percentX;
+            if (checkRight(step, enemy.offsetTop, level)) {
+                enemy.style.left = step + 'px';
+                enemyInfo[level][id][1] += pace;
+            }//end if
+            break;
+    }//end switch
+    // console.log(enemyInfo[level][id]);
+}//end updateEnemy
 
 function addFinish(level) {
     portal.style.top = finish[level][0] + '%';
