@@ -191,7 +191,7 @@ function addEnemies(level) {
             case 3:
                 type = "width: 3%; height: 8%; background-color: darkblue; position:absolute;";
                 id = ' class="stroller"';
-                enemyInfo[level][i].push(setInterval(updateEnemy, 1000, info[2], i, 1, level));
+                enemyInfo[level][i].push(setInterval(updateEnemy, 1000, info[2], i, 1, level, 1000, info[3]));
                 break;
         }//end switch
 
@@ -201,7 +201,7 @@ function addEnemies(level) {
     }//end for
 }//end addEnemies
 
-function updateEnemy(direction, id, pace, level) {
+function updateEnemy(direction, id, pace, level, duration, type) {
     let enemy = document.getElementById(id);
     let step = 0;
     switch(direction) {
@@ -210,7 +210,9 @@ function updateEnemy(direction, id, pace, level) {
             if (checkUp(step, enemy.offsetLeft, level)) {
                 enemy.style.top = step + 'px';
                 enemyInfo[level][id][0] -= pace;
-            }//end if
+            }//end if to see if we hit a wall
+            else
+                changeDirection(direction, id, pace, level, duration, type);
             break;
         case 1: // case to go left
             step = enemy.offsetLeft - pace * percentX;
@@ -218,6 +220,8 @@ function updateEnemy(direction, id, pace, level) {
                 enemy.style.left = step + 'px';
                 enemyInfo[level][id][1] -= pace;
             }//end if
+            else
+                changeDirection(direction, id, pace, level, duration, type);
             break;
         case 2: // case to go down
             step = enemy.offsetTop + pace * percentY;
@@ -225,6 +229,8 @@ function updateEnemy(direction, id, pace, level) {
                 enemy.style.top = step + 'px';
                 enemyInfo[level][id][0] += pace;
             }//end if
+            else
+                changeDirection(direction, id, pace, level, duration, type);
             break;
         case 3: // case to go right
             step = enemy.offsetLeft + pace * percentX;
@@ -232,6 +238,8 @@ function updateEnemy(direction, id, pace, level) {
                 enemy.style.left = step + 'px';
                 enemyInfo[level][id][1] += pace;
             }//end if
+            else
+                changeDirection(direction, id, pace, level, duration, type);
             break;
     }//end switch
     if (!checkEnemies(character.offsetTop, character.offsetLeft, level)) {
@@ -243,6 +251,19 @@ function updateEnemy(direction, id, pace, level) {
         location.reload();
     }//end if to reload the page in the occurence of a game over
 }//end updateEnemy
+
+function changeDirection(direction, id, pace, level, duration, type) {
+    clearInterval(enemyInfo[level][id][4]); 
+    let newDir = 0;
+    let intervalId = 0;
+    switch(type) {
+        case 3:
+            newDir = (direction + 2) % 4;
+            intervalId = setInterval(updateEnemy, duration, newDir, id, pace, level, duration, type);
+            break;
+    }//end switch
+    enemyInfo[level][id][4] = intervalId;
+}//end changeDirection
 
 function addFinish(level) {
     portal.style.top = finish[level][0] + '%';

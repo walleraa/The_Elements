@@ -120,6 +120,7 @@ function checkEnemies(top, left, level) {
         if ((enemyTop <= top && enemyBottom >= top) || (enemyTop <= bottom && enemyBottom >= bottom)) {
             if ((enemyLeft <= left && enemyRight >= left) || (enemyLeft <= right && enemyRight >= right)) {
                 console.log("Killed by enemy of type " + enemies[i][3]);
+                clearInterval(enemyInfo[level][i][4]); 
                 alert("GAME OVER");
                 return false;
             }//end inner if
