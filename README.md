@@ -11,7 +11,11 @@ RULES
 - The grey is enemy type 1
 - The pink and gold abomination is enemy type 2
 - The dark blue is enemy type 3, it can move in a direction
+    - Takes one step every second
     - When it hits a wall, it turns around 180 degrees
+- The purple is enemy type 4, it can move in a direction
+    - Takes one step every half second
+    - When it hits a wall, it turns 90 degrees counter-clockwise
 - Hitting an enemy results in game over
 
 CONTROLS
