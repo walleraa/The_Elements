@@ -21,5 +21,6 @@ CONTROLS
 OTHER COOL FEATURES
 - Accessibility - So far everything has good color contrast
                 - Levels are designed using percentages, so the game can grow and shrink to a user's screen
+                - Yes this means you can change the screen dimensions to move enemies around
 - Local storage - The level counter is stored in local storage, so it saves progress
                 - Yes this means you can crack open a console and set what level you're on to cheat, but what's the fun in that?
