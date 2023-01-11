@@ -7,6 +7,7 @@ RULES
 - The player controls the blue rectangle
 - The red are blocks (or walls)
 - The green is a "portal"
+- The black is an item you can pick up
 - The orange is enemy type 0
 - The grey is enemy type 1
 - The pink and gold abomination is enemy type 2
@@ -21,6 +22,7 @@ RULES
 CONTROLS
 - Arrows keys or WASD to move
 - Spacebar when the player's top left corner is in the portal to advance to the next level
+    - Spacebar when the player's top left corner is on an item picks up the item
 
 OTHER COOL FEATURES
 - Accessibility - So far everything has good color contrast

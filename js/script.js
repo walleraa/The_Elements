@@ -28,6 +28,7 @@ function main() {
     addBlocks(curLevel);
     addFinish(curLevel);
     addEnemies(curLevel);
+    addItems(curLevel);
     keystrokes();
     console.log(height);
     console.log(width);
@@ -66,7 +67,7 @@ function keystrokes() {
             move("down");
         }//DOWN
         else if (event.key === " ") {
-            trigger();
+            trigger(curLevel);
         }//ENTER
         else if (event.key === "u") {
             localStorage.removeItem("level");
@@ -128,7 +129,7 @@ function move(direction) {
     }//end if to reload the page in the occurence of a game over
 }//end move
 
-function trigger() {
+function trigger(level) {
     const top = portal.offsetTop;
     const bottom = top + portal.offsetHeight;
     const left = portal.offsetLeft;
@@ -144,6 +145,15 @@ function trigger() {
             location.reload();
         }//end else
     }//end if
+    else {
+        switch(level) {
+            case 4:
+                const itemTop = 15 * percentY;
+                const itemBottom = itemTop + 3 * percentY;
+                const itemLeft = 85 * percentX;
+                const itemRight = itemLeft + 3 * percentX;
+        }//end switch
+    }//end else
 }//end trigger
 
 function addChar(level) {
@@ -273,6 +283,16 @@ function changeDirection(direction, id, pace, level, duration, type) {
     }//end switch
     enemyInfo[level][id][4] = intervalId;
 }//end changeDirection
+
+function addItems(level) {
+    let item = "";
+    switch(level) {
+        case 4:
+            item = '<div style="width: 3%; height: 3%; background-color: black; position:absolute;';
+            item += 'top: 15%; left: 85%"></div>';
+    }//end switch
+    boundary.insertAdjacentHTML('beforeend', item);
+}//end addItems
 
 function addFinish(level) {
     portal.style.top = finish[level][0] + '%';
