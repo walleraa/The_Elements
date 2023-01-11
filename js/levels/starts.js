@@ -5,6 +5,7 @@ function getStarts() {
     start2();
     start3();
     start4();
+    start5();
     return levelStarts;
 }//end getStarts
 
@@ -23,3 +24,7 @@ function start3() {
 function start4() {
     levelStarts.push([11, 11]);
 }//end start4
+
+function start5() {
+    levelStarts.push([15, 15]);
+}//end start5

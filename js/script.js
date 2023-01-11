@@ -190,8 +190,13 @@ function addEnemies(level) {
                 break;
             case 3:
                 type = "width: 3%; height: 8%; background-color: darkblue; position:absolute;";
-                id = ' class="stroller"';
+                id = ' class="patroller"';
                 enemyInfo[level][i].push(setInterval(updateEnemy, 1000, info[2], i, 1, level, 1000, info[3]));
+                break;
+            case 4:
+                type = "width: 3%; height: 8%; background-color: purple; position:absolute;";
+                id = ' class="stroller"';
+                enemyInfo[level][i].push(setInterval(updateEnemy, 500, info[2], i, 1, level, 500, info[3]));
                 break;
         }//end switch
 
@@ -259,6 +264,10 @@ function changeDirection(direction, id, pace, level, duration, type) {
     switch(type) {
         case 3:
             newDir = (direction + 2) % 4;
+            intervalId = setInterval(updateEnemy, duration, newDir, id, pace, level, duration, type);
+            break;
+        case 4:
+            newDir = (direction + 1) % 4;
             intervalId = setInterval(updateEnemy, duration, newDir, id, pace, level, duration, type);
             break;
     }//end switch

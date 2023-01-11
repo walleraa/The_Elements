@@ -5,6 +5,7 @@ function getFinishes() {
     finish2();
     finish3();
     finish4();
+    finish5();
     return levelFinishes;
 }//end getFinishes
 
@@ -23,3 +24,7 @@ function finish3() {
 function finish4() {
     levelFinishes.push([79, 84]);
 }//end finish4
+
+function finish5() {
+    levelFinishes.push([80, 80]);
+}//end finish5

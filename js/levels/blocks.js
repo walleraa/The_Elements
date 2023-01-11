@@ -8,6 +8,7 @@ function getBlocks() {
     level2();
     level3();
     level4();
+    level5();
     return levels;
 }//end getBlocks
 
@@ -28,3 +29,8 @@ function level4() {
     levelBlocks.push([50, 50, 25, 25]);
     levels.push(levelBlocks);
 }//end level4
+
+function level5() {
+    let levelBlocks = [[10, 35, 0, 65], [15, 3, 35, 75]];
+    levels.push(levelBlocks);
+}//end level5

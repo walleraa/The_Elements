@@ -10,6 +10,7 @@ function getEnemies() {
     enemies2();
     enemies3();
     enemies4();
+    enemies5();
     return levelEnemies;
 }//end getEnemies
 
@@ -28,3 +29,7 @@ function enemies3() {
 function enemies4() {
     levelEnemies.push([[12, 83, 1, 2], [82, 47, 1, 3]]);
 }//end enemies4
+
+function enemies5() {
+    levelEnemies.push([[5, 80, 1, 4]]);
+}//end enemies5
