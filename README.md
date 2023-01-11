@@ -10,7 +10,8 @@ RULES
 - The orange is enemy type 0
 - The grey is enemy type 1
 - The pink and gold abomination is enemy type 2
-- The dark blue is enemy type 3, it right now can move ina  starting direction until it hits a wall
+- The dark blue is enemy type 3, it can move in a direction
+    - When it hits a wall, it turns around 180 degrees
 - Hitting an enemy results in game over
 
 CONTROLS
