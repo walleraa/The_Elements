@@ -1,6 +1,6 @@
 # The_Elements
-This is a very, very simple game that I am making in my free time. 
-The gameplay is somewhat mild and there is no art, but I'm using the excuse of "it's my first time."
+This is a very simple game that I am making in my free time. 
+Play it at https://walleraa.github.io/The_Elements/
 It uses mostly Javascript, since I knew how to use its event listeners to track keystrokes to make an object move.
 
 RULES
