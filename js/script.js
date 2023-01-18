@@ -123,8 +123,9 @@ function move(direction) {
             //     character.style.top = (height - charHeight) + 'px';
             break;
     }//end switch
-
-    if (!checkEnemies(character.offsetTop, character.offsetLeft, curLevel)) {
+    curPosLeft = character.offsetLeft;
+    curPosTop = character.offsetTop;
+    if (!checkEnemies(curPosTop, curPosLeft, curLevel)) {
         location.reload();
     }//end if to reload the page in the occurence of a game over
 }//end move
@@ -134,6 +135,8 @@ function trigger(level) {
     const bottom = top + portal.offsetHeight;
     const left = portal.offsetLeft;
     const right = left + portal.offsetWidth;
+    const curPosBottom = curPosTop + charHeight;
+    const curPosRight = curPosLeft + charWidth;
     if (curPosTop >= top && curPosTop <= bottom && curPosLeft >= left && curPosLeft <= right) {
         if (curLevel === blockInfo.length - 1) {
             console.log("No more levels at the moment!");
@@ -152,6 +155,15 @@ function trigger(level) {
                 const itemBottom = itemTop + 3 * percentY;
                 const itemLeft = 85 * percentX;
                 const itemRight = itemLeft + 3 * percentX;
+                console.log("TOP: "+ curPosTop + " BOTTOM: "+ curPosBottom);
+                console.log("LEFT: "+ curPosLeft + " RIGHT: "+ curPosRight);
+                console.log("itemTop: " + itemTop + " itemBottom: " + itemBottom);
+                console.log("itemLeft: " + itemLeft + " itemRight: " + itemRight);
+                
+                if ((curPosTop <= itemTop && curPosBottom >= itemTop) || (curPosTop <= itemBottom && curPosBottom >= itemBottom)) {
+                    if ((curPosLeft <= itemLeft && curPosRight >= itemLeft) || (curPosLeft <= itemRight && curPosRight >= itemRight))
+                        console.log("Item picked up");
+                }//end if
         }//end switch
     }//end else
 }//end trigger
