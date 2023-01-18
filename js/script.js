@@ -137,16 +137,18 @@ function trigger(level) {
     const right = left + portal.offsetWidth;
     const curPosBottom = curPosTop + charHeight;
     const curPosRight = curPosLeft + charWidth;
-    if (curPosTop >= top && curPosTop <= bottom && curPosLeft >= left && curPosLeft <= right) {
-        if (curLevel === blockInfo.length - 1) {
-            console.log("No more levels at the moment!");
+    if ((curPosTop <= top && curPosBottom >= top) || (curPosTop <= bottom && curPosBottom >= bottom)) {
+        if ((curPosLeft <= left && curPosRight >= left) || (curPosLeft <= right && curPosRight >= right)) {
+            if (curLevel === blockInfo.length - 1) {
+                console.log("No more levels at the moment!");
+            }//end if
+            else {
+                curLevel += 1;
+                localStorage.removeItem("level"); //Have to remove then set or else it gets funky for some reason
+                localStorage.setItem("level", curLevel);
+                location.reload();
+            }//end else
         }//end if
-        else {
-            curLevel += 1;
-            localStorage.removeItem("level"); //Have to remove then set or else it gets funky for some reason
-            localStorage.setItem("level", curLevel);
-            location.reload();
-        }//end else
     }//end if
     else {
         switch(level) {
@@ -155,10 +157,6 @@ function trigger(level) {
                 const itemBottom = itemTop + 3 * percentY;
                 const itemLeft = 85 * percentX;
                 const itemRight = itemLeft + 3 * percentX;
-                console.log("TOP: "+ curPosTop + " BOTTOM: "+ curPosBottom);
-                console.log("LEFT: "+ curPosLeft + " RIGHT: "+ curPosRight);
-                console.log("itemTop: " + itemTop + " itemBottom: " + itemBottom);
-                console.log("itemLeft: " + itemLeft + " itemRight: " + itemRight);
                 
                 if ((curPosTop <= itemTop && curPosBottom >= itemTop) || (curPosTop <= itemBottom && curPosBottom >= itemBottom)) {
                     if ((curPosLeft <= itemLeft && curPosRight >= itemLeft) || (curPosLeft <= itemRight && curPosRight >= itemRight))
