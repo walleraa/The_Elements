@@ -21,8 +21,8 @@ RULES
 
 CONTROLS
 - Arrows keys or WASD to move
-- Spacebar when the player's top left corner is in the portal to advance to the next level
-    - Spacebar when the player's top left corner is on an item picks up the item
+- Spacebar when the player is in the portal to advance to the next level
+    - Spacebar when the player is on an item picks up the item
 
 OTHER COOL FEATURES
 - Accessibility - So far everything has good color contrast
